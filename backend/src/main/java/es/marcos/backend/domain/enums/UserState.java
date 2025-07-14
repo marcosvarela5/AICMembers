@@ -1,3 +1,3 @@
 package es.marcos.backend.domain.enums;
 
-public enum UserState { ACTIVE, INACTIVE};
+public enum UserState { ACTIVE, INACTIVE, PENDING};
