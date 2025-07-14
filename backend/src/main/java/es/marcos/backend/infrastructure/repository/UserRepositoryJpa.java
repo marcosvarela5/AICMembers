@@ -6,11 +6,14 @@ import es.marcos.backend.domain.model.User;
 import es.marcos.backend.domain.model.UserCriteria;
 import es.marcos.backend.domain.repository.UserRepository;
 import es.marcos.backend.infrastructure.mapper.UserEntityMapper;
+import es.marcos.backend.infrastructure.repository.specification.UserSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class UserRepositoryJpa implements UserRepository {
 
 
