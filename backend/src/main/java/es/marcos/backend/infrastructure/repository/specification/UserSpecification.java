@@ -1,4 +1,4 @@
-package es.marcos.backend.infrastructure.repository;
+package es.marcos.backend.infrastructure.repository.specification;
 
 import es.marcos.backend.domain.model.UserCriteria;
 import es.marcos.backend.infrastructure.repository.entity.UserEntity;
