@@ -12,6 +12,7 @@ public class User {
     private String name;
     private String surname;
     private String dni;
+    private String password;
     private LocalDate birthDate;
     private String address;
     private String zipCode;
@@ -37,6 +38,7 @@ public class User {
                 String name,
                 String surname,
                 String dni,
+                String password,
                 LocalDate birthDate,
                 String address,
                 String zipCode,
@@ -58,6 +60,7 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.dni = dni;
+        this.password = password;
         this.birthDate = birthDate;
         this.address = address;
         this.zipCode = zipCode;
@@ -245,4 +248,8 @@ public class User {
     public String getZipCode() {
         return zipCode;
     }
+
+    public String getPassword() {return password;}
+
+    public void setPassword(String password) {this.password = password;}
 }

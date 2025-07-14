@@ -26,6 +26,9 @@ public class UserEntity {
     @Column(name = "dni", nullable = false)
     private String dni;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate birthDate;
 
@@ -87,6 +90,7 @@ public class UserEntity {
                       String name,
                       String surname,
                       String dni,
+                      String password,
                       LocalDate birthDate,
                       String address,
                       String zipCode,
@@ -108,6 +112,7 @@ public class UserEntity {
         this.name = name;
         this.surname = surname;
         this.dni = dni;
+        this.password = password;
         this.birthDate = birthDate;
         this.address = address;
         this.zipCode = zipCode;
@@ -158,6 +163,14 @@ public class UserEntity {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDate getBirthDate() {
