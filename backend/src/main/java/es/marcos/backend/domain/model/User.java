@@ -1,5 +1,6 @@
 package es.marcos.backend.domain.model;
 
+import es.marcos.backend.application.dto.UpdateUserRequest;
 import es.marcos.backend.domain.enums.UserRole;
 import es.marcos.backend.domain.enums.UserState;
 
@@ -252,4 +253,24 @@ public class User {
     public String getPassword() {return password;}
 
     public void setPassword(String password) {this.password = password;}
+
+
+    public void updateFrom(UpdateUserRequest request) {
+        this.name = request.getName();
+        this.surname = request.getSurname();
+        this.dni = request.getDni();
+        this.birthDate = request.getBirthDate();
+        this.address = request.getAddress();
+        this.zipCode = request.getZipCode();
+        this.town = request.getTown();
+        this.province = request.getProvince();
+        this.telephone = request.getTelephone();
+        this.mobilePhone = request.getMobilePhone();
+        this.email = request.getEmail();
+        this.bankName = request.getBankName();
+        this.iban = request.getIban();
+        this.receivesNotifications = request.getReceivesNotifications();
+        this.imageConsent = request.getImageConsent();
+        this.acceptPayments = request.getAcceptPayments();
+    }
 }
