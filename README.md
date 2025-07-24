@@ -4,7 +4,7 @@
 
 This is my first full-stack solo project, where I'm using several new technologies — including **Vue**, which I had never worked with before — as well as the **hexagonal architecture**. Any feedback regarding the code quality, architecture, or structure is very welcome!
 
-## 🔧 Tech Stack
+##🔧 Tech Stack
 
 ### Backend
 - Java 17
@@ -58,10 +58,10 @@ This is my first full-stack solo project, where I'm using several new technologi
 ## 📦 Project Structure: Hexagonal (Ports and adapters)
 
 backend/
-├── application/ # Business logic (DTOs, services, mappers)
-├── domain/ # Domain model and repositories
-├── infrastructure/ # Security, config, utilities
-├── web/ # REST controllers
+├── application/ # Business logic (DTOs, services, mappers)  
+├── domain/ # Domain model and repositories  
+├── infrastructure/ # Security, config, utilities  
+├── web/ # REST controllers  
 
 ## 🔐 Security
 
