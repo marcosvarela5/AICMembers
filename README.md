@@ -57,7 +57,7 @@ This is my first full-stack solo project, where I'm using several new technologi
 
 ## 📦 Project Structure: Hexagonal (Ports and adapters)
 
-backend/
+backend/  
 ├── application/ # Business logic (DTOs, services, mappers)  
 ├── domain/ # Domain model and repositories  
 ├── infrastructure/ # Security, config, utilities  
