@@ -8,14 +8,14 @@ This is my first full-stack solo project, where I'm using several new technologi
 
 ### Backend
 - Java 17
-- Spring Boot 3
+- Spring Boot
 - Spring Security (JWT)
 - PostgreSQL
 - Maven
 - Hibernate / JPA
 
 ### Frontend (in progress)
-- Vue.js 3
+- Vue
 - TypeScript
 - Vite
 
@@ -27,33 +27,7 @@ This is my first full-stack solo project, where I'm using several new technologi
 - User states: `PENDING`, `ACTIVE`, `REJECTED`.
 - Role-based access control: `USER`, `ADMIN`.
 - Admin functionality to approve or reject new members.
-
-## 📦 Project Structure
-
-
-## 🔧 Tech Stack
-
-### Backend
-- Java 17
-- Spring Boot 3
-- Spring Security (JWT)
-- PostgreSQL
-- Maven
-- Hibernate/JPA
-
-### Frontend (in progress)
-- Vue.js 3
-- TypeScript
-- Vite
-
-## ⚙️ Main Features
-
-- Secure user registration with validation and password hashing.
-- JWT-based authentication.
-- Global JWT filter for protected routes.
-- User states: `PENDING`, `ACTIVE`, `REJECTED`.
-- Role-based access control (`USER`, `ADMIN`).
-- Admin endpoints to approve or reject new users.
+- 
 
 ## 📦 Project Structure: Hexagonal (Ports and adapters)
 
