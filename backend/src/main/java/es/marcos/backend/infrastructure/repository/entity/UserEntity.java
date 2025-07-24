@@ -1,5 +1,6 @@
 package es.marcos.backend.infrastructure.repository.entity;
 
+
 import es.marcos.backend.domain.enums.UserRole;
 import es.marcos.backend.domain.enums.UserState;
 import jakarta.persistence.*;
