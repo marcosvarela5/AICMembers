@@ -49,8 +49,8 @@ backend/
 PostgreSQL. A local instance is recommended (default port: `5433`). Credentials can be configured in `application.properties`.
 
 ## 🚀 Getting Started
-Set up your PostgreSQL database
-Execute it using mvn spring-boot:run or from your preferred IDE
+Set up your PostgreSQL database  
+Execute it using mvn spring-boot:run or from your preferred IDE  
 
-📄 License
+📄 License  
 MIT License
