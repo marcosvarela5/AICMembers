@@ -2,6 +2,7 @@ package es.marcos.backend.application.service;
 
 import es.marcos.backend.application.dto.UserDto;
 import es.marcos.backend.application.mapper.UserMapper;
+import es.marcos.backend.domain.enums.UserRole;
 import es.marcos.backend.domain.enums.UserState;
 import es.marcos.backend.domain.exception.UserAlreadyActiveException;
 import es.marcos.backend.domain.exception.UserNotFoundException;
@@ -37,6 +38,7 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
         }
 
         user.setUserState(UserState.ACTIVE);
+        user.setUserRole(UserRole.SOCIO);
         repository.save(user);
     }
 
