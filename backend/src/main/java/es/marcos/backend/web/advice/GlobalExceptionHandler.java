@@ -1,5 +1,6 @@
 package es.marcos.backend.web.advice;
 
+import es.marcos.backend.domain.exception.UserAlreadyActiveException;
 import es.marcos.backend.domain.exception.UserNotFoundException;
 import es.marcos.backend.web.dto.ErrorResponse;
 import org.springframework.http.HttpHeaders;
@@ -75,6 +76,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserAlreadyActiveException.class)
+    public ResponseEntity<String> handleUserAlreadyActive(UserAlreadyActiveException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
 
