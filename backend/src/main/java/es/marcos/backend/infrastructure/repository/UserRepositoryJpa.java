@@ -100,6 +100,6 @@ public class UserRepositoryJpa implements UserRepository {
 
     @Override
     public Page<User> findByUserRole(UserRole role, Pageable pageable) {
-        return null;
+        return springDataRepo.findByUserRole(role, pageable).map(mapper::toDomain);
     }
 }
