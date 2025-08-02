@@ -27,7 +27,12 @@ public class AdminController {
 
     @GetMapping("/pending")
     @PreAuthorize("hasRole('ADMIN')")
-    public Page<UserDto> getPendingUsers(Pageable pageable) {
-        return userAdministrationService.getPendingUsers(pageable);
+    public ResponseEntity<Page<UserDto>> getPendingUsers(Pageable pageable) {
+        Page<UserDto> pendingUsers = userAdministrationService.getPendingUsers(pageable);
+        if (pendingUsers.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(pendingUsers);
     }
+
 }
