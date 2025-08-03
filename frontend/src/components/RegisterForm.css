@@ -49,6 +49,18 @@ label {
     margin-bottom: 12px;
 }
 
+.legal-text {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 1.5rem;
+    line-height: 1.4;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-left: 4px solid #ccc;
+    border-radius: 6px;
+}
+
+
 input {
     padding: 10px 14px;
     margin-bottom: 20px;

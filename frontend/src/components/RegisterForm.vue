@@ -5,11 +5,11 @@
 
       <form class="form" @submit.prevent="handleSubmit">
         <!-- Datos personales -->
-        <label for="name">Nombre:</label>
+        <label for="name">Nome:</label>
         <input id="name" v-model="form.name" @input="validateField('name')" />
         <span class="error" v-if="errors.name">{{ errors.name }}</span>
 
-        <label for="surname">Apellidos:</label>
+        <label for="surname">Apelidos:</label>
         <input id="surname" v-model="form.surname" @input="validateField('surname')" />
         <span class="error" v-if="errors.surname">{{ errors.surname }}</span>
 
@@ -17,12 +17,12 @@
         <input id="dni" v-model="form.dni" @input="validateField('dni')" />
         <span class="error" v-if="errors.dni">{{ errors.dni }}</span>
 
-        <label for="birthDate">Fecha de nacimiento:</label>
+        <label for="birthDate">Data de nacemento:</label>
         <input id="birthDate" type="date" v-model="form.birthDate" @input="validateField('birthDate')" />
         <span class="error" v-if="errors.birthDate">{{ errors.birthDate }}</span>
 
         <!-- Dirección -->
-        <label for="address">Dirección:</label>
+        <label for="address">Enderezo:</label>
         <input id="address" v-model="form.address" @input="validateField('address')" />
         <span class="error" v-if="errors.address">{{ errors.address }}</span>
 
@@ -30,7 +30,7 @@
         <input id="zipCode" v-model="form.zipCode" @input="validateField('zipCode')" />
         <span class="error" v-if="errors.zipCode">{{ errors.zipCode }}</span>
 
-        <label for="town">Localidad:</label>
+        <label for="town">Localidade:</label>
         <input id="town" v-model="form.town" @input="validateField('town')" />
         <span class="error" v-if="errors.town">{{ errors.town }}</span>
 
@@ -43,7 +43,7 @@
         <input id="telephone" v-model="form.telephone" @input="validateField('telephone')" />
         <span class="error" v-if="errors.telephone">{{ errors.telephone }}</span>
 
-        <label for="mobilePhone">Teléfono móvil:</label>
+        <label for="mobilePhone">Teléfono móbil:</label>
         <input id="mobilePhone" v-model="form.mobilePhone" @input="validateField('mobilePhone')" />
         <span class="error" v-if="errors.mobilePhone">{{ errors.mobilePhone }}</span>
 
@@ -52,12 +52,12 @@
         <input id="email" type="email" v-model="form.email" @input="validateField('email')" />
         <span class="error" v-if="errors.email">{{ errors.email }}</span>
 
-        <label for="password">Contraseña:</label>
+        <label for="password">Contrasinal:</label>
         <input id="password" type="password" v-model="form.password" @input="validateField('password')" />
         <span class="error" v-if="errors.password">{{ errors.password }}</span>
 
         <!-- Datos bancarios -->
-        <label for="bankName">Entidad bancaria:</label>
+        <label for="bankName">Entidade bancaria:</label>
         <input id="bankName" v-model="form.bankName" @input="validateField('bankName')" />
         <span class="error" v-if="errors.bankName">{{ errors.bankName }}</span>
 
@@ -68,13 +68,13 @@
         <!-- Consentimientos -->
         <label>
           <input type="checkbox" v-model="form.receivesNotifications" />
-          Deseo recibir notificaciones
+          Desexo recibir notificacións
         </label>
         <span class="error" v-if="errors.receivesNotifications">{{ errors.receivesNotifications }}</span>
 
         <label>
           <input type="checkbox" v-model="form.imageConsent" />
-          Consiento el uso de imágenes
+          Consinto o uso de imaxes
         </label>
         <span class="error" v-if="errors.imageConsent">{{ errors.imageConsent }}</span>
 
@@ -83,6 +83,14 @@
           Acepto pagos por domiciliación
         </label>
         <span class="error" v-if="errors.acceptPayments">{{ errors.acceptPayments }}</span>
+
+        <p class="legal-text">
+          No cumprimento do disposto no artigo 5 da Ley orgánica 15/1999, de 13 de setembro, de protección de
+          datos de carácter persoal, infórmase que os datos persoais recollidos neste documento incorporaranse a
+          un ficheiro para o seu tratamento. Vostede pode exercer os dereitos de acceso, rectificación, cancelación e
+          oposición previstos na lei mediante un escrito dirixido á Agrupación Instructiva de Caamouco.
+        </p>
+
 
         <button type="submit">Solicitar alta</button>
       </form>
