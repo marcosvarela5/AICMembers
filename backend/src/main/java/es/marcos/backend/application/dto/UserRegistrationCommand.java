@@ -21,7 +21,6 @@ public class UserRegistrationCommand {
     @Past
     private LocalDate birthDate;
 
-    @NotBlank
     @Size(max = 500)
     private String address;
 
@@ -29,15 +28,12 @@ public class UserRegistrationCommand {
     @Size(max = 10)
     private String zipCode;
 
-    @NotBlank
     @Size(max = 50)
     private String town;
 
-    @NotBlank
     @Size(max = 50)
     private String province;
 
-    @NotBlank
     @Size(max = 20)
     private String telephone;
 

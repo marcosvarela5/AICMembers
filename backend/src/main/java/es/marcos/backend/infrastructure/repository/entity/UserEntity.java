@@ -36,7 +36,7 @@ public class UserEntity {
     @Column(name = "direccion")
     private String address;
 
-    @Column(name = "codigo_postal")
+    @Column(name = "codigo_postal", nullable = false)
     private String zipCode;
 
     @Column(name = "localidad")
@@ -55,7 +55,7 @@ public class UserEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "nombre_entidad")
+    @Column(name = "nombre_entidad", nullable = false)
     private String bankName;
 
     @Column(name = "iban", nullable = false, length = 34)
