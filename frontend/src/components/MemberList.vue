@@ -1,0 +1,149 @@
+<template>
+  <div class="member-list">
+    <h2>Lista de socios</h2>
+
+    <input
+        v-model="search"
+        type="text"
+        placeholder="Buscar por nome ou apelidos"
+        class="search-box"
+    />
+
+    <table class="member-table">
+      <thead>
+      <tr>
+        <th @click="sortBy('name')" class="sortable">
+          Nome<span class="arrow">{{ sortArrow('name') }}</span>
+        </th>
+        <th @click="sortBy('userRole')" class="sortable">
+          Rol<span class="arrow">{{ sortArrow('userRole') }}</span>
+        </th>
+        <th @click="sortBy('registerDate')" class="sortable">
+          Data de alta<span class="arrow">{{ sortArrow('registerDate') }}</span>
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr v-for="user in filteredUsers" :key="user.id">
+        <td>
+  <span :class="user.userRole === 'ADMIN' ? 'glow-admin' : ''">
+    {{ user.name }} {{ user.surname }}
+  </span>
+        </td>
+
+        <td class="role-cell">
+          {{ user.userRole }}
+        </td>
+
+        <td>{{ formatDate(user.registerDate) }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button @click="previousPage" :disabled="page === 0">Anterior</button>
+      <span>Páxina {{ page + 1 }} de {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="page >= totalPages - 1">Seguinte</button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import {ref, computed, onMounted} from 'vue'
+import axios from 'axios'
+import './MemberList.css'
+
+
+const users = ref<any[]>([])
+const page = ref(0)
+const size = 10
+const totalPages = ref(0)
+const search = ref('')
+const sortKey = ref<'name' | 'userRole' | 'registerDate'>('name')
+const sortAsc = ref(true)
+
+
+const filteredUsers = computed(() => {
+  const query = search.value.toLowerCase().trim()
+
+  let result = users.value
+      .filter(user => user.userRole !== 'ASPIRANTE')
+      .filter(user =>
+          !query ||
+          user.name.toLowerCase().includes(query) ||
+          user.surname.toLowerCase().includes(query)
+      )
+
+  result = [...result].sort((a, b) => {
+    let valA = a[sortKey.value]
+    let valB = b[sortKey.value]
+
+    if (sortKey.value === 'registerDate') {
+      valA = new Date(valA)
+      valB = new Date(valB)
+    } else {
+      valA = valA?.toLowerCase?.() || ''
+      valB = valB?.toLowerCase?.() || ''
+    }
+
+    if (valA < valB) return sortAsc.value ? -1 : 1
+    if (valA > valB) return sortAsc.value ? 1 : -1
+    return 0
+  })
+
+  return result
+})
+
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr)
+  return date.toLocaleDateString('gl-ES')
+}
+
+function sortBy(key: 'name' | 'userRole' | 'registerDate') {
+  if (sortKey.value === key) {
+    sortAsc.value = !sortAsc.value
+  } else {
+    sortKey.value = key
+    sortAsc.value = true
+  }
+}
+
+function sortArrow(key: string): string {
+  if (sortKey.value === key) {
+    return sortAsc.value ? ' ▲' : ' ▼'
+  }
+  return ' ▲▼'  // Ambas flechas gris claro
+}
+
+
+
+async function loadUsers() {
+  try {
+    const response = await axios.get(`/api/users?page=${page.value}&size=${size}`)
+    console.log('Usuarios cargados:', response.data)
+    users.value = response.data.content
+    totalPages.value = response.data.totalPages
+  } catch (error) {
+    console.error('Erro ao cargar os socios:', error)
+  }
+}
+
+function nextPage() {
+  if (page.value < totalPages.value - 1) {
+    page.value++
+    loadUsers()
+  }
+}
+
+function previousPage() {
+  if (page.value > 0) {
+    page.value--
+    loadUsers()
+  }
+}
+
+onMounted(loadUsers)
+</script>
+

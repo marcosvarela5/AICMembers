@@ -9,7 +9,10 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@tsparticles/vue3": "^3.0.1",
     "axios": "^1.11.0",
+    "tsparticles": "^3.9.1",
+    "tsparticles-engine": "^2.12.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
