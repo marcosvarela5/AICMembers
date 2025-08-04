@@ -45,7 +45,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
                 command.getProvince(),
                 command.getTelephone(),
                 command.getMobilePhone(),
-                command.getEmail(),
+                command.getEmail().toLowerCase(),
                 command.getBankName(),
                 command.getIban(),
                 command.getReceivesNotifications(),

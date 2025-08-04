@@ -28,15 +28,18 @@ public class UserLoginServiceImpl implements UserLoginService {
 
     @Override
     public String login(LoginRequest request) {
+
+        String normalizedEmail = request.getEmail().toLowerCase();
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(
-                request.getEmail(),
+                normalizedEmail,
                 request.getPassword()
         );
         try {
             authenticationManager.authenticate(authentication);
             System.out.println("Autenticación correcta");
 
-            User user = repository.findByEmail(request.getEmail())
+            User user = repository.findByEmail(normalizedEmail)
                     .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
             return jwtService.generateToken(user);
