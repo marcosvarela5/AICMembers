@@ -6,14 +6,19 @@
         <router-link to="/about">About</router-link>
         <router-link to="/register">Alta</router-link>
         <router-link to="/members">Socios</router-link>
+
+        <router-link v-if="!auth.isAuthenticated" to="/login">Iniciar</router-link>
+        <button v-else @click="logout" class="logout-button">Pechar sesión</button>
       </nav>
     </header>
 
     <main class="content">
-      <router-view/>
+      <router-view />
     </main>
   </div>
 </template>
+
+
 
 <style scoped>
 
@@ -86,4 +91,32 @@ html, body {
   padding: 2rem 1rem;
   box-sizing: border-box;
 }
+
+.logout-button {
+  background: none;
+  border: none;
+  font-weight: 600;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.logout-button:hover {
+  background: #ffe4e6;
+}
 </style>
+<script setup lang="ts">
+import { useAuthStore } from '@/stores/authStore'
+import { useRouter } from 'vue-router'
+
+const auth = useAuthStore()
+const router = useRouter()
+
+function logout() {
+  auth.logout()
+  router.push('/')
+}
+</script>
+

@@ -1,0 +1,111 @@
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 2rem;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.login-form .card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 3rem 3.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-form .logo {
+    display: block;
+    margin: 0 auto 2rem;
+    max-width: 90px;
+}
+
+.login-form .form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.login-form .form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    margin-top: 0.4rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #f9fafb;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #1e293b;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 2px rgba(0, 0, 0, 0.02);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input::placeholder {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.login-form input:focus {
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    outline: none;
+}
+
+.login-form input.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.login-form .error {
+    font-size: 0.8rem;
+    color: #ef4444;
+    margin-top: 0.25rem;
+}
+
+.login-form button[type="submit"] {
+    margin-top: 1.5rem;
+    align-self: flex-end;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(to right, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+.login-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+}
+
+.login-form button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+    .login-form .card {
+        padding: 2rem;
+    }
+
+    .login-form button[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+}
