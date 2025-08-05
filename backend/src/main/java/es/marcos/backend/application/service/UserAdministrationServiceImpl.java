@@ -68,5 +68,14 @@ public class UserAdministrationServiceImpl implements UserAdministrationService 
     public Page<UserDto> getPendingUsers(Pageable pageable) {
         return repository.findByUserState(UserState.PENDING, pageable).map(userMapper::toDto);
     }
+
+    @Override
+    public void updateRole(Long id, UserRole role) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
+        user.setUserRole(role);
+        repository.save(user);
+    }
 }
 

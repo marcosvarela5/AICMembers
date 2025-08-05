@@ -37,6 +37,21 @@
         </td>
 
         <td>{{ formatDate(user.registerDate) }}</td>
+
+        <td v-if="isAdminView">
+          <button
+              v-if="user.userRole === 'SOCIO'"
+              @click="$emit('promote', user.id)"
+          >
+            Ascender
+          </button>
+          <button
+              v-if="user.userRole === 'MODERATOR'"
+              @click="$emit('demote', user.id)"
+          >
+            Degradar
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -54,6 +69,7 @@ import {ref, computed, onMounted} from 'vue'
 import axios from 'axios'
 import './MemberList.css'
 import { useAuthStore } from '@/stores/authStore'
+import { defineProps } from 'vue'
 
 
 const users = ref<any[]>([])
@@ -69,6 +85,13 @@ const roleImages = {
   SOCIO: new URL('@/assets/roles/socio.png', import.meta.url).href,
   MODERATOR: new URL('@/assets/roles/moderator.png', import.meta.url).href
 }
+
+const props = defineProps({
+  isAdminView: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const filteredUsers = computed(() => {
   const query = search.value.toLowerCase().trim()

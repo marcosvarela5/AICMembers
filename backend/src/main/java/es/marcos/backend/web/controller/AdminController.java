@@ -2,6 +2,7 @@ package es.marcos.backend.web.controller;
 
 import es.marcos.backend.application.dto.UserDto;
 import es.marcos.backend.application.service.UserAdministrationService;
+import es.marcos.backend.domain.enums.UserRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,20 @@ public class AdminController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> reject(@PathVariable Long id) {
         userAdministrationService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/promote/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> promoteUser(@PathVariable Long id) {
+        userAdministrationService.updateRole(id, UserRole.MODERATOR);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/demote/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> demoteUser(@PathVariable Long id) {
+        userAdministrationService.updateRole(id, UserRole.SOCIO);
         return ResponseEntity.ok().build();
     }
 
