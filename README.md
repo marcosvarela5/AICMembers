@@ -75,3 +75,6 @@ All functionalities shown here are fully functional. Galician (GL) is the main l
 
 ### Pending users
 ![Pending users](docs/pending.png)
+
+### Promote and demote users
+![Promote users](docs/promotedemote.png)
