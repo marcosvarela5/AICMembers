@@ -61,7 +61,7 @@ PostgreSQL. A local instance is recommended (default port: `5433`). Credentials 
 MIT License
 
 ## Screenshots
-All functionalities shown here are fully functional. Galician (GL) is the main language.
+All functionalities shown here are fully working. Galician (GL) is the main language.
 
 ### Login screen
 ![Login Screen](docs/login.png)
