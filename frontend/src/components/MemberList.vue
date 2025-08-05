@@ -21,33 +21,47 @@
         <th @click="sortBy('registerDate')" class="sortable">
           Data de alta<span class="arrow">{{ sortArrow('registerDate') }}</span>
         </th>
+        <th v-if="isAdminView">Accións</th>
       </tr>
       </thead>
 
       <tbody>
       <tr v-for="user in filteredUsers" :key="user.id">
         <td>
-  <span :class="user.userRole === 'ADMIN' ? 'glow-admin' : ''">
-    {{ user.name }} {{ user.surname }}
-  </span>
+            <span
+                :class="{
+                'glow-admin': user.userRole === 'ADMIN',
+                'glow-mod': user.userRole === 'MODERATOR',
+              }"
+            >
+              {{ user.name }} {{ user.surname }}
+            </span>
         </td>
 
         <td class="role-cell">
-          <img :src="roleImages[user.userRole]" :alt="user.userRole" class="role-icon" />
+          <img
+              :src="roleImages[user.userRole]"
+              :alt="user.userRole"
+              class="role-icon"
+          />
         </td>
 
         <td>{{ formatDate(user.registerDate) }}</td>
 
         <td v-if="isAdminView">
           <button
+              class="btn-promote"
               v-if="user.userRole === 'SOCIO'"
-              @click="$emit('promote', user.id)"
+              @click="openConfirmModal(user.id, 'promote')"
+              type="button"
           >
             Ascender
           </button>
           <button
+              class="btn-demote"
               v-if="user.userRole === 'MODERATOR'"
-              @click="$emit('demote', user.id)"
+              @click="openConfirmModal(user.id, 'demote')"
+              type="button"
           >
             Degradar
           </button>
@@ -61,16 +75,22 @@
       <span>Páxina {{ page + 1 }} de {{ totalPages }}</span>
       <button @click="nextPage" :disabled="page >= totalPages - 1">Seguinte</button>
     </div>
+
+
+    <ConfirmModal
+        :visible="showModal"
+        :message="modalMessage"
+        @confirm="onConfirm"
+        @cancel="onCancel"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref, computed, onMounted} from 'vue'
+import {ref, computed, onMounted, defineExpose, defineProps} from 'vue'
 import axios from 'axios'
-import './MemberList.css'
-import { useAuthStore } from '@/stores/authStore'
-import { defineProps } from 'vue'
-
+import {useAuthStore} from '@/stores/authStore'
+import ConfirmModal from './modals/ModalConfirm.vue'
 
 const users = ref<any[]>([])
 const page = ref(0)
@@ -85,6 +105,12 @@ const roleImages = {
   SOCIO: new URL('@/assets/roles/socio.png', import.meta.url).href,
   MODERATOR: new URL('@/assets/roles/moderator.png', import.meta.url).href
 }
+
+const showModal = ref(false)
+const modalMessage = ref('')
+const userIdToAct = ref<number | null>(null)
+const actionType = ref<'promote' | 'demote' | null>(null)
+const emit = defineEmits(['promote', 'demote'])
 
 const props = defineProps({
   isAdminView: {
@@ -124,7 +150,6 @@ const filteredUsers = computed(() => {
   return result
 })
 
-
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr)
   return date.toLocaleDateString('gl-ES')
@@ -145,8 +170,6 @@ function sortArrow(key: string): string {
   }
   return ' ▲▼'  // Ambas flechas gris claro
 }
-
-
 
 async function loadUsers() {
   try {
@@ -177,6 +200,35 @@ function previousPage() {
   }
 }
 
+function openConfirmModal(userId: number, action: 'promote' | 'demote') {
+  userIdToAct.value = userId
+  actionType.value = action
+  modalMessage.value = action === 'promote'
+      ? '¿Seguro que quieres ascender a este usuario a moderador?'
+      : '¿Seguro que quieres degradar a este usuario a socio?'
+  showModal.value = true
+}
+
+function onConfirm() {
+  if (userIdToAct.value !== null && actionType.value !== null) {
+    if (actionType.value === 'promote') {
+      emit('promote', userIdToAct.value)
+    } else {
+      emit('demote', userIdToAct.value)
+    }
+  }
+  showModal.value = false
+}
+
+function onCancel() {
+  showModal.value = false
+}
+
 onMounted(loadUsers)
+
+defineExpose({
+  loadUsers
+})
 </script>
 
+<style src="./MemberList.css"></style>

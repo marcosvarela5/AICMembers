@@ -156,15 +156,61 @@ th.sortable.active .arrow {
     0 0 18px rgb(255, 255, 255);
 }
 
+.glow-mod {
+    color: #52acf6;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgb(255, 255, 255),
+    0 0 12px rgb(82, 153, 246),
+    0 0 18px rgb(255, 255, 255);
+}
+
+
+
 .role-icon {
-    width: 80px;
-    height: 80px;
+    width: 140px;
+    height: 100px;
     object-fit: contain;
     vertical-align: middle;
     margin: 0 auto;
     display: block;
 }
 
+.btn-promote, .btn-demote {
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.25s ease, box-shadow 0.2s ease;
+    user-select: none;
+}
+
+.btn-promote {
+    background-color: #22c55e; /* verde */
+    color: white;
+    box-shadow: 0 2px 6px rgba(34, 197, 94, 0.5);
+}
+
+.btn-promote:hover,
+.btn-promote:focus {
+    background-color: #16a34a; /* verde más oscuro */
+    box-shadow: 0 0 8px rgba(22, 163, 74, 0.8);
+    outline: none;
+}
+
+.btn-demote {
+    background-color: #ef4444; /* rojo */
+    color: white;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5);
+}
+
+.btn-demote:hover,
+.btn-demote:focus {
+    background-color: #dc2626; /* rojo más oscuro */
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.8);
+    outline: none;
+}
 
 @keyframes sparkle {
     0% {

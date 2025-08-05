@@ -4,9 +4,8 @@
       <button @click="section = 'pending'" :class="{ active: section === 'pending' }">
         Usuarios pendentes
       </button>
-
       <button @click="section = 'manageUsers'" :class="{ active: section === 'manageUsers' }">
-        Administrar socios
+        Administrar usuarios
       </button>
     </div>
 
@@ -19,11 +18,11 @@
       <PendingUsers v-if="section === 'pending'" />
       <MemberList
           v-if="section === 'manageUsers'"
+          ref="memberListRef"
           :isAdminView="true"
           @promote="handlePromote"
           @demote="handleDemote"
       />
-
     </div>
   </div>
 </template>
@@ -31,12 +30,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import PendingUsers from './PendingUsers.vue'
-import MemberList from "./MemberList.vue";
-import axios from 'axios';
+import MemberList from './MemberList.vue'
+import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
 
 const section = ref('pending')
 const auth = useAuthStore()
+const memberListRef = ref<InstanceType<typeof MemberList> | null>(null)
 
 async function handlePromote(userId: number) {
   try {
@@ -45,10 +45,9 @@ async function handlePromote(userId: number) {
         Authorization: `Bearer ${auth.token}`
       }
     })
-    alert('Usuario promovido a moderador')
+    await memberListRef.value?.loadUsers()
   } catch (error) {
     console.error(error)
-    alert('Error promoviendo usuario')
   }
 }
 
@@ -59,10 +58,9 @@ async function handleDemote(userId: number) {
         Authorization: `Bearer ${auth.token}`
       }
     })
-    alert('Usuario degradado a socio')
+    await memberListRef.value?.loadUsers()
   } catch (error) {
     console.error(error)
-    alert('Error degradando usuario')
   }
 }
 </script>
