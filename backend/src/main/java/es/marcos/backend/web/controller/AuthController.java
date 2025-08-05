@@ -28,10 +28,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@Valid @RequestBody UserRegistrationCommand command) {
+    public ResponseEntity<Void> register(@Valid @RequestBody UserRegistrationCommand command, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         userRegistrationService.register(command);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {

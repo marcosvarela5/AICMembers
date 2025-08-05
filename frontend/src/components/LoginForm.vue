@@ -73,7 +73,7 @@ async function handleLogin() {
   try {
     const response = await axios.post('http://localhost:8080/api/auth/login', form)
 
-    auth.login(response.data.token)
+    await auth.login(response.data.token)
     await router.push('/members')
     console.log('Login correcto.')
   } catch (error: any) {
@@ -84,4 +84,5 @@ async function handleLogin() {
     }
   }
 }
+
 </script>

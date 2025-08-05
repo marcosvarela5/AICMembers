@@ -1,32 +1,23 @@
+// src/stores/authStore.ts
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         token: localStorage.getItem('token') || '',
-        user: null as { name: string; email: string; userRole: string } | null
+        user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null
     }),
 
     getters: {
-        isAuthenticated: (state) => !!state.token
+        isAuthenticated: (state) => !!state.token,
+        isAdmin: (state) => state.user?.userRole === 'ADMIN'
     },
 
     actions: {
         async login(token: string) {
             this.token = token
             localStorage.setItem('token', token)
-
-            try {
-                const response = await axios.get('/api/auth/me', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                this.user = response.data
-            } catch (error) {
-                this.user = null
-                console.error('Erro ao recuperar o usuario:', error)
-            }
+            await this.loadUserFromToken()
         },
 
         async loadUserFromToken() {
@@ -39,8 +30,10 @@ export const useAuthStore = defineStore('auth', {
                     }
                 })
                 this.user = response.data
-            } catch {
-                this.user = null
+                localStorage.setItem('user', JSON.stringify(response.data))
+            } catch (error) {
+                console.error('Erro ao obter usuario:', error)
+                this.logout()
             }
         },
 
@@ -48,6 +41,7 @@ export const useAuthStore = defineStore('auth', {
             this.token = ''
             this.user = null
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
         }
     }
 })

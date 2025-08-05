@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class AdminController {
 
     private final UserAdministrationService userAdministrationService;
@@ -33,6 +33,13 @@ public class AdminController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(pendingUsers);
+    }
+
+    @DeleteMapping("/reject/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> reject(@PathVariable Long id) {
+        userAdministrationService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }

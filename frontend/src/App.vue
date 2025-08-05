@@ -6,6 +6,12 @@
         <router-link to="/about">About</router-link>
         <router-link v-if="!auth.isAuthenticated" to="/register">Alta</router-link>
         <router-link to="/members">Socios</router-link>
+        <router-link
+            v-if="auth.user?.userRole === 'ADMIN'"
+            to="/admin"
+        >
+          Panel de administración
+        </router-link>
 
         <div class="auth-section">
           <router-link v-if="!auth.isAuthenticated" to="/login" class="login-button">Iniciar</router-link>

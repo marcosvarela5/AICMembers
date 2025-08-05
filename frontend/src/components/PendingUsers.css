@@ -1,0 +1,56 @@
+.pending-users {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.pending-users table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.pending-users th,
+.pending-users td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.pending-users th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+}
+
+.accept {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reject {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.accept:hover {
+    background-color: #16a34a;
+}
+
+.reject:hover {
+    background-color: #dc2626;
+}
+
+.pending-users td.actions {
+    display: flex;
+    gap: 1rem;
+}
