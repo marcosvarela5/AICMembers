@@ -1,4 +1,4 @@
-# AICMembers 🧑‍💼
+# AICMembers
 
 **AICMembers** is a web application designed to help my town association manage its members and contribute to its digitalization. It allows users to register, authenticate using JWT, and be approved or rejected by administrators. The system emphasizes security, structure, and scalability.
 
