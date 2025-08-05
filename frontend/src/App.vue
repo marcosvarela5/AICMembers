@@ -2,8 +2,6 @@
   <div class="layout">
     <header class="navbar">
       <nav class="nav-links">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
         <router-link v-if="!auth.isAuthenticated" to="/register">Alta</router-link>
         <router-link to="/members">Socios</router-link>
         <router-link
