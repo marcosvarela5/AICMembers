@@ -8,26 +8,29 @@ This is my first full-stack solo project, where I'm using several new technologi
 
 ### Backend
 - Java 17
-- Spring Boot
+- Spring Boot 3
 - Spring Security (JWT)
 - PostgreSQL
 - Maven
 - Hibernate / JPA
 
 ### Frontend (in progress)
-- Vue
+- Vue 3
 - TypeScript
+- Vue Router
 - Vite
+- Pinia
+- Axios
 
 ## ⚙️ Main Features
 
 - Secure user registration with validation and password encryption.
 - JWT-based authentication and stateless session management.
 - Global JWT filter for protecting secured endpoints.
-- User states: `PENDING`, `ACTIVE`, `REJECTED`.
-- Role-based access control: `USER`, `ADMIN`.
+- User states: `PENDING`, `ACTIVE`, `INACTIVE`.
+- Role-based access control: `ADMIN`, `MODERATOR`, `SOCIO`, `ASPIRANTE`
 - Admin functionality to approve or reject new members.
-- 
+- Consulting member list and apply filters
 
 ## 📦 Project Structure: Hexagonal (Ports and adapters)
 
@@ -49,8 +52,23 @@ backend/
 PostgreSQL. A local instance is recommended (default port: `5433`). Credentials can be configured in `application.properties`.
 
 ## 🚀 Getting Started
-Set up your PostgreSQL database  
-Execute it using mvn spring-boot:run or from your preferred IDE  
+### Database: Set up your PostgreSQL database  
+### Backend: Execute it using mvn spring-boot:run or from your preferred IDE 
+### Frontend: npm run dev
 
-📄 License  
+
+## 📄 License  
 MIT License
+
+## Screenshots
+All functionalities shown here are fully functional. Galician (GL) is the main language.
+
+### Pantalla de inicio de sesión
+![Login Screen](docs/login.png)
+
+### Formulario de alta de socios
+![Formulario de Alta](docs/alta1.png)
+![Formulario de Alta](docs/alta2.png)
+
+### Lista de socios
+![Formulario de Alta](docs/listasocios.jpg)
