@@ -1,5 +1,6 @@
 package es.marcos.backend.application.service;
 
+import es.marcos.backend.application.dto.AuthenticatedUserDto;
 import es.marcos.backend.application.dto.UpdateUserRequest;
 import es.marcos.backend.domain.exception.UserNotFoundException;
 import es.marcos.backend.domain.model.User;
@@ -31,5 +32,17 @@ public class UserSelfServiceImpl implements UserSelfService {
 
         user.updateFrom(request);
         repository.save(user);
+    }
+
+    @Override
+    public AuthenticatedUserDto getOwnInfo(String email) {
+        User user = repository.findByEmail(email.toLowerCase())
+                .orElseThrow(() -> new UserNotFoundException("Usuario non atopado"));
+
+        return new AuthenticatedUserDto(
+                user.getName(),
+                user.getEmail(),
+                user.getUserRole().name()
+        );
     }
 }

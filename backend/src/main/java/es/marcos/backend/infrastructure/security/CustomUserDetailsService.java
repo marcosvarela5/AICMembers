@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository repository;
@@ -20,9 +20,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        String normalizedEmail = email.toLowerCase();
         System.out.println("Buscando usuario con email: " + email);
-        User user = repository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("No existe el usuario con email " + email));
+        User user = repository.findByEmail(normalizedEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("No existe el usuario con email " + normalizedEmail));
 
         return new CustomUserDetails(user);
     }

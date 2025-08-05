@@ -71,12 +71,12 @@ public class UserRepositoryJpa implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return springDataRepo.findByEmail(email).map(mapper::toDomain);
+        return springDataRepo.findByEmail(email.toLowerCase()).map(mapper::toDomain);
     }
 
     @Override
     public boolean existsByEmail(String email) {
-        return springDataRepo.existsByEmail(email);
+        return springDataRepo.existsByEmail(email.toLowerCase());
     }
 
     @Override

@@ -1,7 +1,7 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import MemberListView from '@/views/MemberListView.vue'
+import MemberListView from '@/views/MemberListView.vue';
 import LoginView from "@/views/LoginView.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,6 +14,14 @@ const routes: Array<RouteRecordRaw> = [
         path: "/register",
         name: "register",
         component: RegisterView,
+        beforeEnter: (to, from, next) => {
+            const token = localStorage.getItem('token')
+            if (token) {
+                next('/')
+            } else {
+                next()
+            }
+        }
     },
     {
         path: "/about",
@@ -33,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token')
             if (token) {
-                next('/members') // xa está logueado
+                next('/members') // Ya está logueado
             } else {
                 next()
             }

@@ -24,7 +24,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     @Override
     public void register(UserRegistrationCommand command) {
 
-        boolean exists = repository.existsByEmail(command.getEmail());
+        boolean exists = repository.existsByEmail(command.getEmail().toLowerCase());
         if (exists) {
             throw new IllegalArgumentException("El email ya está registrado.");
         }

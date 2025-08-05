@@ -1,6 +1,7 @@
 package es.marcos.backend.infrastructure.security;
 
 import es.marcos.backend.domain.enums.UserRole;
+import es.marcos.backend.domain.repository.UserRepository;
 import es.marcos.backend.infrastructure.security.jwt.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,18 +20,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthFilter;
-
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
-        this.jwtAuthFilter = jwtAuthFilter;
-    }
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/me").permitAll()
+                        .requestMatchers("/api/auth/register").authenticated()
                         .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole(UserRole.ADMIN.name())
                         .anyRequest().authenticated()
@@ -39,6 +35,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -56,5 +53,10 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder)
                 .and()
                 .build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository repository) {
+        return new CustomUserDetailsService(repository);
     }
 }

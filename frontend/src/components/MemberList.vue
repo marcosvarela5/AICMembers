@@ -53,6 +53,7 @@
 import {ref, computed, onMounted} from 'vue'
 import axios from 'axios'
 import './MemberList.css'
+import { useAuthStore } from '@/stores/authStore'
 
 
 const users = ref<any[]>([])
@@ -62,6 +63,7 @@ const totalPages = ref(0)
 const search = ref('')
 const sortKey = ref<'name' | 'userRole' | 'registerDate'>('name')
 const sortAsc = ref(true)
+const auth = useAuthStore()
 
 
 const filteredUsers = computed(() => {
@@ -121,7 +123,11 @@ function sortArrow(key: string): string {
 
 async function loadUsers() {
   try {
-    const response = await axios.get(`/api/users?page=${page.value}&size=${size}`)
+    const response = await axios.get(`/api/users?page=${page.value}&size=${size}`, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`
+      }
+    })
     console.log('Usuarios cargados:', response.data)
     users.value = response.data.content
     totalPages.value = response.data.totalPages
