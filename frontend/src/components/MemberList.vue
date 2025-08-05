@@ -33,7 +33,7 @@
         </td>
 
         <td class="role-cell">
-          {{ user.userRole }}
+          <img :src="roleImages[user.userRole]" :alt="user.userRole" class="role-icon" />
         </td>
 
         <td>{{ formatDate(user.registerDate) }}</td>
@@ -64,7 +64,11 @@ const search = ref('')
 const sortKey = ref<'name' | 'userRole' | 'registerDate'>('name')
 const sortAsc = ref(true)
 const auth = useAuthStore()
-
+const roleImages = {
+  ADMIN: new URL('@/assets/roles/admin.png', import.meta.url).href,
+  SOCIO: new URL('@/assets/roles/socio.png', import.meta.url).href,
+  MODERATOR: new URL('@/assets/roles/moderator.png', import.meta.url).href
+}
 
 const filteredUsers = computed(() => {
   const query = search.value.toLowerCase().trim()

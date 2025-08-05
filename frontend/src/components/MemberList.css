@@ -137,7 +137,7 @@ th.sortable.active .arrow {
     font-size: 1rem;
     width: 280px;
     background: #ffffff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -151,10 +151,18 @@ th.sortable.active .arrow {
 .glow-admin {
     color: #ee5959;
     font-weight: bold;
-    text-shadow:
-            0 0 6px rgb(255, 255, 255),
-            0 0 12px rgb(255, 114, 114),
-            0 0 18px rgb(255, 255, 255);
+    text-shadow: 0 0 6px rgb(255, 255, 255),
+    0 0 12px rgb(255, 114, 114),
+    0 0 18px rgb(255, 255, 255);
+}
+
+.role-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin: 0 auto;
+    display: block;
 }
 
 
