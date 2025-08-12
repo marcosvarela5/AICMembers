@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Alta de socio</h1>
-    <RegisterForm />
+    <RegisterForm/>
   </div>
 </template>
 

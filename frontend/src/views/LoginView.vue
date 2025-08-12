@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Inicio de sesión de socio</h1>
-    <LoginForm />
+    <LoginForm/>
   </div>
 </template>
 

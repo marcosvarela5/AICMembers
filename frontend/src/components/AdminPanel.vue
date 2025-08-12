@@ -15,7 +15,7 @@
         <p>Benvido/a, administrador/a.</p>
       </div>
 
-      <PendingUsers v-if="section === 'pending'" />
+      <PendingUsers v-if="section === 'pending'"/>
       <MemberList
           v-if="section === 'manageUsers'"
           ref="memberListRef"
@@ -28,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref} from 'vue'
 import PendingUsers from './PendingUsers.vue'
 import MemberList from './MemberList.vue'
-import axios from 'axios'
-import { useAuthStore } from '@/stores/authStore'
+import {useAuthStore} from '@/stores/authStore'
+import {api} from '@/services/api';
 
 const section = ref('pending')
 const auth = useAuthStore()
@@ -40,7 +40,7 @@ const memberListRef = ref<InstanceType<typeof MemberList> | null>(null)
 
 async function handlePromote(userId: number) {
   try {
-    await axios.post(`/api/admin/promote/${userId}`, null, {
+    await api.post(`/admin/promote/${userId}`, null, {
       headers: {
         Authorization: `Bearer ${auth.token}`
       }
@@ -53,7 +53,7 @@ async function handlePromote(userId: number) {
 
 async function handleDemote(userId: number) {
   try {
-    await axios.post(`/api/admin/demote/${userId}`, null, {
+    await api.post(`/admin/demote/${userId}`, null, {
       headers: {
         Authorization: `Bearer ${auth.token}`
       }

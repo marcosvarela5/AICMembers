@@ -1,18 +1,18 @@
 <template>
   <div class="login-form">
     <div class="card">
-      <img :src="aicLogo" alt="AIC logo" class="logo" />
+      <img :src="aicLogo" alt="AIC logo" class="logo"/>
 
       <form class="form" @submit.prevent="handleLogin">
         <label for="email">Email:
           <input id="email" type="email" v-model="form.email" @input="validateField('email')" class="input"
-                 placeholder="usuario@exemplo.com" />
+                 placeholder="usuario@exemplo.com"/>
           <span class="error" v-if="errors.email">{{ errors.email }}</span>
         </label>
 
         <label for="password">Contrasinal:
           <input id="password" type="password" v-model="form.password" @input="validateField('password')" class="input"
-                 placeholder="********" />
+                 placeholder="********"/>
           <span class="error" v-if="errors.password">{{ errors.password }}</span>
         </label>
 
@@ -25,12 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import axios from 'axios'
+import {reactive} from 'vue'
+import {api} from '@/services/api';
 import aicLogo from '@/assets/aic.jpg'
 import './LoginForm.css'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/authStore' // ← aquí importas a store
+import {useRouter} from 'vue-router'
+import {useAuthStore} from '@/stores/authStore' // ← aquí importas a store
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -71,7 +71,7 @@ async function handleLogin() {
   if (!validateAll()) return
 
   try {
-    const response = await axios.post('http://localhost:8080/api/auth/login', form)
+    const response = await api.post('/auth/login', form)
 
     await auth.login(response.data.token)
     await router.push('/members')

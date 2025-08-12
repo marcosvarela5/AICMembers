@@ -141,7 +141,7 @@
 
 
 <script setup lang="ts">
-import axios from 'axios'
+import {api} from '@/services/api';
 import {reactive} from 'vue'
 import './RegisterForm.css'
 import aicLogo from '@/assets/aic.jpg'
@@ -239,7 +239,7 @@ async function handleSubmit() {
   }
 
   try {
-    await axios.post('http://localhost:8080/api/auth/register', form)
+    await api.post('/auth/register', form)
     alert('¡Alta solicitada correctamente!')
     Object.assign(form, {
       name: '', surname: '', dni: '', birthDate: '',

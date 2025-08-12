@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Lista de socios</h1>
-    <MemberList />
+    <MemberList/>
   </div>
 </template>
 

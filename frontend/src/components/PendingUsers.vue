@@ -27,15 +27,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import axios from 'axios'
+import {onMounted, ref} from 'vue'
+import {api} from '@/services/api';
 
 const users = ref<any[]>([])
 
 function authHeader() {
   const token = localStorage.getItem('token')
   return token
-      ? { headers: { Authorization: `Bearer ${token}` } }
+      ? {headers: {Authorization: `Bearer ${token}`}}
       : null
 }
 
@@ -47,7 +47,7 @@ async function fetchPendingUsers() {
   }
 
   try {
-    const response = await axios.get('/api/admin/pending?page=0&size=20', config)
+    const response = await api.get('/admin/pending?page=0&size=20', config)
     console.log('Usuarios pendentes:', response.data)
     users.value = response.data.content
   } catch (error) {
@@ -60,7 +60,7 @@ async function approve(id: number) {
   if (!config) return
 
   try {
-    await axios.post(`/api/admin/approve/${id}`, null, config)
+    await api.post(`/admin/approve/${id}`, null, config)
     users.value = users.value.filter(user => user.id !== id)
   } catch (error) {
     console.error('Erro ao aprobar usuario', error)
@@ -72,7 +72,7 @@ async function reject(id: number) {
   if (!config) return
 
   try {
-    await axios.delete(`/api/admin/reject/${id}`, config)
+    await api.delete(`/admin/reject/${id}`, config)
     users.value = users.value.filter(user => user.id !== id)
   } catch (error) {
     console.error('Erro ao rexeitar usuario', error)
