@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import history from 'connect-history-api-fallback'
@@ -28,7 +28,7 @@ export default defineConfig({
             '/api': {
                 target: 'http://localhost:8080',
                 changeOrigin: true,
-                rewrite: path => path.replace(/^\/api/, '/api') // puedes omitir rewrite si no haces cambios
+                rewrite: path => path.replace(/^\/api/, '/api')
             }
         }
     }

@@ -1,18 +1,29 @@
 # Node.js
-/frontend/node_modules
-/frontend/dist
+frontend/node_modules
+frontend/dist
 
 # Maven
-/backend/target
+backend/target
 
 # Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# IDEs
-.idea
-.vscode
+# IDEs / Config
+.idea/
+.vscode/
+*.iml
 
 # OS files
 .DS_Store
 Thumbs.db
-/hoja de ruta.txt
+
+# Environment / Secrets
+.env
+**/.env
+.env.*
+
+# Personal / Local
+hoja de ruta.txt

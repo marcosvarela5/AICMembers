@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
+import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router"
 import HomeView from "../views/HomeView.vue"
 import RegisterView from "../views/RegisterView.vue"
 import MemberListView from '@/views/MemberListView.vue'
 import LoginView from "@/views/LoginView.vue"
 import AdminPanelView from "@/views/AdminPanelView.vue"
-import axios from "axios";
+import {api} from '@/services/api';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -71,8 +71,8 @@ async function isAdmin(): Promise<boolean> {
     if (!token) return false
 
     try {
-        const response = await axios.get('/api/auth/me', {
-            headers: { Authorization: `Bearer ${token}` }
+        const response = await api.get('/auth/me', {
+            headers: {Authorization: `Bearer ${token}`}
         })
         return response.data.userRole === 'ADMIN'
     } catch (error) {
