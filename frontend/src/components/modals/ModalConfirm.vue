@@ -11,11 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import {defineProps, defineEmits} from 'vue'
 
 const props = defineProps({
-  message: { type: String, required: true },
-  visible: { type: Boolean, required: true }
+  message: {type: String, required: true},
+  visible: {type: Boolean, required: true}
 })
 
 const emit = defineEmits(['confirm', 'cancel'])
@@ -33,12 +33,13 @@ function cancel() {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
+
 .modal-content {
   background: white;
   padding: 1.5rem 2rem;
@@ -46,11 +47,13 @@ function cancel() {
   max-width: 300px;
   text-align: center;
 }
+
 .buttons {
   margin-top: 1rem;
   display: flex;
   justify-content: space-around;
 }
+
 .btn-confirm {
   background-color: #22c55e;
   color: white;
@@ -59,6 +62,7 @@ function cancel() {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .btn-cancel {
   background-color: #ef4444;
   color: white;

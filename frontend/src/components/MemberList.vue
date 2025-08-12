@@ -88,7 +88,7 @@
 
 <script setup lang="ts">
 import {ref, computed, onMounted, defineExpose, defineProps} from 'vue'
-import axios from 'axios'
+import {api} from '@/services/api';
 import {useAuthStore} from '@/stores/authStore'
 import ConfirmModal from './modals/ModalConfirm.vue'
 
@@ -173,7 +173,7 @@ function sortArrow(key: string): string {
 
 async function loadUsers() {
   try {
-    const response = await axios.get(`/api/users?page=${page.value}&size=${size}`, {
+    const response = await api.get(`/users?page=${page.value}&size=${size}`, {
       headers: {
         Authorization: `Bearer ${auth.token}`
       }

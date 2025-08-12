@@ -1,16 +1,23 @@
-// src/stores/authStore.ts
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import {defineStore} from 'pinia'
+import {api} from '@/services/api'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         token: localStorage.getItem('token') || '',
-        user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null
+        user: (() => {
+            try {
+                return localStorage.getItem('user')
+                    ? JSON.parse(localStorage.getItem('user')!)
+                    : null
+            } catch {
+                return null
+            }
+        })()
     }),
 
     getters: {
-        isAuthenticated: (state) => !!state.token,
-        isAdmin: (state) => state.user?.userRole === 'ADMIN'
+        isAuthenticated: (s) => !!s.token,
+        isAdmin: (s) => s.user?.userRole === 'ADMIN'
     },
 
     actions: {
@@ -22,19 +29,18 @@ export const useAuthStore = defineStore('auth', {
 
         async loadUserFromToken() {
             if (!this.token) return
-
             try {
-                const response = await axios.get('/api/auth/me', {
-                    headers: {
-                        Authorization: `Bearer ${this.token}`
-                    }
-                })
-                this.user = response.data
-                localStorage.setItem('user', JSON.stringify(response.data))
-            } catch (error) {
-                console.error('Erro ao obter usuario:', error)
+                const {data} = await api.get('/auth/me')
+                this.user = data
+                localStorage.setItem('user', JSON.stringify(data))
+            } catch (e) {
+                console.error('Erro ao obter usuario:', e)
                 this.logout()
             }
+        },
+
+        async hydrate() {
+            if (this.token) await this.loadUserFromToken()
         },
 
         logout() {
@@ -42,6 +48,7 @@ export const useAuthStore = defineStore('auth', {
             this.user = null
             localStorage.removeItem('token')
             localStorage.removeItem('user')
+            delete api.defaults.headers.common.Authorization
         }
     }
 })
